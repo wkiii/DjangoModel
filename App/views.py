@@ -35,7 +35,7 @@ def add_person(request):
     # peo.p_age = flag
     # peo.save()
     # #Person.objects.create(p_name="bob %d" % flag, p_age=15, p_sex=1)
-    peo = Person(p_name="Bob %d" % flag)
+    peo = Person(p_name="Bob %d" % flag, p_age=15, p_sex=1)
     peo.save()
     return HttpResponse("add one")
 
