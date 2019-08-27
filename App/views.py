@@ -25,21 +25,26 @@ def add_person(request):
     1.先实例化对象，然后依次或者随意给类属性赋值(没有赋值的属性，默认保存为blank)，最后执行对象的save方法；
     2.直接用类的方法，但create方法内部需要填写所有字段； Person.objects.create()
     3.将类实例化的过程中，直接在类中赋值属性(赋值所有属性)，然后用实例化对象的save方法：peo = Person()   peo.save()
+    4.创造了一个自定义的create类方法，然后用实例化后的对象执行save方法：Person.create()  peo.save()
     """
-    # save的方式，可以填写任意字段，任意字段都可以为空(需要注意unique的字段只能空白一次)
-    # Person.objects.create()这种方式，括号内必须填写所有字段；
-    # Person() 这种方式同上，括号内也是填写所有字段。
 
     flag = random.randrange(10000)
     # peo = Person()
     # peo.p_age = flag
     # peo.save()
     # #Person.objects.create(p_name="bob %d" % flag, p_age=15, p_sex=1)
-    peo = Person(p_name="Bob %d" % flag, p_age=15, p_sex=1)
+    # ##peo = Person(p_name="Bob %d" % flag, p_age=15, p_sex=1)
+    # ##peo.save()
+    peo = Person.create(p_name="wurui")
     peo.save()
     return HttpResponse("add one")
 
 
 def get_person(request):
-    pe1 = Person.objects.all()
+    # pe1 = Person.objects.all()
+    pe1 = Person.objects.all().order_by("-p_name")
+    # values是将原来的Queryset列表内的对象 转换成了字典。
+    pe2 = pe1.values()
+    print(pe2)
+    print(pe2)
     return render(request, "get_P.html", locals())
