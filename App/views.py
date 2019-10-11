@@ -43,7 +43,7 @@ def add_person(request):
 def get_person(request):
     # pe1 = Person.objects.all()
     pe1 = Person.objects.all().order_by("-p_name")
-    # values是将原来的Queryset列表内的对象 转换成了字典。
+    # values()方法返回的是一个Queryset，但Queryset中的每个值都是字典。
     pe2 = pe1.values()
     print(pe2)
     print(pe2)
